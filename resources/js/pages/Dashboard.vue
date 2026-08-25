@@ -1,23 +1,17 @@
-<script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
-import { dashboard } from '@/routes';
-
-defineOptions({
-    layout: {
-        breadcrumbs: [
-            {
-                title: 'Dashboard',
-                href: dashboard(),
-            },
-        ],
-    },
-});
-</script>
-
 <template>
     <Head title="Dashboard" />
-
+    <table>
+        <thead>
+            <tr>
+                <th>Componente</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="componente in props.componentes" :key="componente.id">
+                <td>{{ componente.nome }}</td>
+            </tr>
+        </tbody>
+    </table>
     <div
         class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
     >
@@ -45,3 +39,26 @@ defineOptions({
         </div>
     </div>
 </template>
+<script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
+import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
+import { dashboard } from '@/routes';
+
+const props = defineProps({
+    componentes: {
+        type: Array,
+        default: () => [],
+    },
+
+});
+defineOptions({
+    layout: {
+        breadcrumbs: [
+            {
+                title: 'Dashboard',
+                href: dashboard(),
+            },
+        ],
+    }
+});
+</script>

@@ -20,6 +20,25 @@ class ComponenteComputador extends Model
         'user_exclusao_id',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->user_cadastro_id = auth()->id();
+            $model->user_atualizacao_id = auth()->id();
+        });
+
+        static::updating(function ($model) {
+            $model->user_atualizacao_id = auth()->id();
+        });
+
+        static::deleting(function ($model) {
+            $model->user_exclusao_id = auth()->id();
+            $model->save();
+        });
+    }
+
     public function userCadastro()
     {
         return $this->belongsTo(User::class, 'user_cadastro_id', 'id');
