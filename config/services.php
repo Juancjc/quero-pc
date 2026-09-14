@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'pcapi' => [
+        'base_url' => env('PCAPI_BASE_URL', 'http://192.168.100.250:4000'),
+        'token' => env('PCAPI_API_TOKEN'),
+        'timeout' => (int) env('PCAPI_TIMEOUT', 15),
+    ],
+
 ];

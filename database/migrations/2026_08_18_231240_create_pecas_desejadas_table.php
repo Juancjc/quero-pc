@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pecas_desejadas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('componente_computadore_id')->unsigned();
-            $table->foreign('componente_computadore_id')->references('id')->on('componente_computadores');
+            $table->foreign('componente_computadore_id')->references('id')->on('componentes_computadores');
             $table->bigInteger('computador_id')->unsigned();
             $table->foreign('computador_id')->references('id')->on('computadores');
             // o caminho vai ser o caminho do arquivo da peça desejada, que pode ser uma imagem ou um arquivo de texto
