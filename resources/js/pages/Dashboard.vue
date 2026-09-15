@@ -1,17 +1,8 @@
 <template>
     <Head title="Dashboard" />
-    <table>
-        <thead>
-            <tr>
-                <th>Componente</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="componente in props.componentes" :key="componente.id">
-                <td>{{ componente.nome }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div style="height: 400px">
+        <Bar :data="chartData" :options="chartOptions" />
+    </div>
     <div
         class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
     >
@@ -43,14 +34,32 @@
 import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import { dashboard } from '@/routes';
-
+import { Bar } from 'vue-chartjs';
 const props = defineProps({
     componentes: {
         type: Array,
         default: () => [],
     },
-
+    usuariosTotal: {
+        type: Number,
+        default: 0,
+    },
+    computadoresTotal: {
+        type: Number,
+        default: 0,
+    },
 });
+const chartData = {
+    labels: ['Usuarios', 'Computadores'],
+    datasets: [
+        {
+            label: 'Vendas',
+            data: [props.usuariosTotal, props.computadoresTotal],
+            backgroundColor: ['#3b82f6', '#10b981'],
+        },
+    ],
+};
+
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -59,6 +68,6 @@ defineOptions({
                 href: dashboard(),
             },
         ],
-    }
+    },
 });
 </script>

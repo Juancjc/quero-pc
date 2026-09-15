@@ -76,9 +76,8 @@ class ComputadorController extends Controller
 
         $computador->delete();
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Computador removido com sucesso.']);
-
-        return to_route('computador.index');
+        return Inertia::render('Computador/Index')
+            ->with('toast', ['type' => 'success', 'message' => 'Computador excluído com sucesso.']);
     }
 
     /**

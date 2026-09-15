@@ -43,12 +43,13 @@
 
         <div class="flex flex-col gap-3">
             <div class="flex items-center justify-between">
-                <h3 class="text-sm font-medium">Peças Desejadas</h3>
+                <h3 class="text-sm font-medium" v-if="form.nome">Peças Desejadas</h3>
                 <Button
                     type="button"
                     size="sm"
                     variant="outline"
                     @click="adicionarPeca"
+                    :disabled="!form.nome"
                 >
                     Adicionar peça
                 </Button>

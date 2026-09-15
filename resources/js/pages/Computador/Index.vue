@@ -33,6 +33,14 @@
                     <Button as-child size="sm" variant="outline" class="w-fit">
                         <Link :href="edit(computador.id)">Editar</Link>
                     </Button>
+                    <Button
+                        size="sm"
+                        variant="outline"
+                        class="w-fit"
+                        @click="excluir(computador.id)"
+                    >
+                        Excluir
+                    </Button>
                 </CardContent>
             </Card>
         </div>
@@ -48,7 +56,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
+import axios from 'axios';
 import Heading from '@/components/Heading.vue';
 import { Badge } from '@/components/ui/badge';
 import type { BadgeVariants } from '@/components/ui/badge';
@@ -61,7 +70,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { create, edit } from '@/routes/computador';
+import { create, deleteMethod, edit } from '@/routes/computador';
 
 type Computador = {
     id: number;
@@ -90,5 +99,12 @@ function statusVariant(status: string): BadgeVariants['variant'] {
         default:
             return 'outline';
     }
+}
+function excluir(id: number) {
+    if (!confirm('Deseja realmente excluir este computador?')) {
+        return;
+    }
+
+    axios.delete(deleteMethod.url(id)).then(() => router.reload());
 }
 </script>
